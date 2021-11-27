@@ -4,7 +4,7 @@
 # This setup format based on that by Navdeep Gill <https://www.linkedin.com/in/navdeep-gill-b1729456/>
 # https://github.com/navdeep-G/setup.py
 
-# Changes by Neil D. Lawrence for fynesse template
+# Changes by Neil D. Lawrence for fynesse template and further by Garðar Ingvarsson for implementing the template.
 
 # Note: To use the 'upload' functionality of this file, you must:
 #   $ pipenv install twine --dev
@@ -17,11 +17,11 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = "fynesse"
-DESCRIPTION = "Template files for performing fynesse pipeline data analysis with python."
-URL = "https://github.com/lawrennd/fynesse_template"
-EMAIL = "emal@domain.here"
-AUTHOR = "Givenname Familyname"
+NAME = "housingpricetools"
+DESCRIPTION = "Tools for performing pipeline data analysis with python on housing price."
+URL = "https://github.com/gardarjuto/housing-price-prediction"
+EMAIL = "gardarjuto@gmail.com"
+AUTHOR = "Garðar Ingvarsson"
 REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "0.1.0"
 
@@ -35,7 +35,7 @@ EXTRAS = {
     "interactive html plots": ["bokeh",],
 }
 
-PACKAGE_DATA = {"fynesse": ["defaults.yml"]}
+PACKAGE_DATA = {"housingpricetools": ["defaults.yml"]}
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------

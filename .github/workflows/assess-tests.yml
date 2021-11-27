@@ -18,6 +18,6 @@ jobs:
       - run: pip install nose-show-skipped
       - run: pip install mock
       - run: python setup.py install
-      - run: coverage run assess-tests.py
+      - run: coverage run assess_tests.py
       - run: codecov
             

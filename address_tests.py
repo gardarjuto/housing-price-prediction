@@ -2,4 +2,4 @@
 
 import nose, warnings
 
-nose.main("fynesse", defaultTest="fynesse/tests/address", argv=["", ""])
+nose.main("housingpricetools", defaultTest="housingpricetools/tests/address", argv=["", ""])

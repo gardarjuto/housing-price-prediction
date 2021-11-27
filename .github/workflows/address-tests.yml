@@ -18,5 +18,5 @@ jobs:
       - run: pip install nose-show-skipped
       - run: pip install mock
       - run: python setup.py install
-      - run: coverage run process-tests.py
+      - run: coverage run address-tests.py
       - run: codecov

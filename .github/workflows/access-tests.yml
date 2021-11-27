@@ -20,8 +20,4 @@ jobs:
       - run: python setup.py install
       - run: coverage run access_tests.py
       - run: codecov
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
             

@@ -15,14 +15,13 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
       - run: pip install codecov
-      - run: pip install coveralls
       - run: pip install nose-show-skipped
       - run: pip install mock
       - run: python setup.py install
       - run: coverage run access_tests.py
       - run: codecov
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
             

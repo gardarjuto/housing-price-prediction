@@ -22,7 +22,7 @@ DESCRIPTION = "Tools for performing pipeline data analysis with python on housin
 URL = "https://github.com/gardarjuto/housing-price-prediction"
 EMAIL = "gardarjuto@gmail.com"
 AUTHOR = "Garðar Ingvarsson"
-REQUIRES_PYTHON = ">=3.7.0"
+REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "0.1.0"
 
 # What packages are required for this module to be executed?

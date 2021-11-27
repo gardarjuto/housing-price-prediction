@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.x', 'pypy-3.6', 'pypy-3.7']
+        python-version: ['pypy-3.6', 'pypy-3.7']
     name: Python ${{ matrix.python-version }} sample
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
       - run: pip install nose-show-skipped
       - run: pip install mock
       - run: python setup.py install
-      - run: coverage run access-tests.py
+      - run: coverage run access_tests.py
       - run: codecov
       - run: coveralls
             

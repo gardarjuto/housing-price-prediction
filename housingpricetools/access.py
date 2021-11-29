@@ -7,32 +7,15 @@ import os
 
 """Place commands in this file to access the data electronically. Don't remove any missing values, or deal with outliers. Make sure you have legalities correct, both intellectual property and personal data privacy rights. Beyond the legal side also think about the ethical issues around this data. """
 
-def data():
-    """Read the data from the web or local file, returning structured format such as a data frame"""
-    raise NotImplementedError
-
-
-def execute_sql(conn, sql, fetch=None):
-    """Executes the provided SQL statement given the connection, returning one, all or no rows."""
-    with conn:
-        with conn.cursor() as crs:
-            crs.execute(sql)
-            if fetch == 'one':
-                return crs.fetchone()
-            elif fetch == 'all':
-                return crs.fetchall()
-    
-
 def upload_local_file(conn, file_path, table_name):
     """Uploads a file from the local file system into the provided table."""
-    with conn:
-        with conn.curson() as crs:
-            sql = f"""
-                LOAD DATA LOCAL INFILE '{file_path}' INTO TABLE `{table_name}`
-                FIELDS TERMINATED BY ','
-                LINES STARTING BY '' TERMINATED BY '\n';
-                """
-            crs.execute(sql)
+    with conn.curson() as crs:
+        sql = f"""
+            LOAD DATA LOCAL INFILE '{file_path}' INTO TABLE `{table_name}`
+            FIELDS TERMINATED BY ','
+            LINES STARTING BY '' TERMINATED BY '\n';
+            """
+        crs.execute(sql)
 
 
 def download_file(url, dest_path, chunk_size=8192):

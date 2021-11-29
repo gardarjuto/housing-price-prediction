@@ -20,8 +20,8 @@ def upload_local_file(conn, file_path, table_name):
 
 def download_file(url, dest_path, chunk_size=8192):
     """Downloads a file from URL to the destination path. Creates directories if output path doesn't exist."""
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
+    if not os.path.exists(dest_path):
+        os.makedirs(dest_path)
 
     file_name = os.path.basename(url)
     file_path = os.path.join(dest_path, file_name)

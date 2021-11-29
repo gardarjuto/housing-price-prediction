@@ -9,7 +9,7 @@ import os
 
 def upload_local_file(conn, file_path, table_name):
     """Uploads a file from the local file system into the provided table."""
-    with conn.curson() as crs:
+    with conn.cursor() as crs:
         sql = f"""
             LOAD DATA LOCAL INFILE '{file_path}' INTO TABLE `{table_name}`
             FIELDS TERMINATED BY ','

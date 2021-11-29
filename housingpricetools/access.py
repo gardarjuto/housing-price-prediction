@@ -16,6 +16,7 @@ def upload_local_file(conn, file_path, table_name):
             LINES STARTING BY '' TERMINATED BY '\n';
             """
         crs.execute(sql)
+    conn.commit()
 
 
 def download_file(url, dest_path, chunk_size=8192):

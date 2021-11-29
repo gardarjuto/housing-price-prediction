@@ -13,6 +13,7 @@ def upload_local_file(conn, file_path, table_name):
         sql = f"""
             LOAD DATA LOCAL INFILE '{file_path}' INTO TABLE `{table_name}`
             FIELDS TERMINATED BY ','
+            OPTIONALLY ENCLOSED BY '"'
             LINES STARTING BY '' TERMINATED BY '\n';
             """
         crs.execute(sql)

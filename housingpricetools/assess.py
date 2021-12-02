@@ -3,6 +3,7 @@ from .config import *
 import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.decomposition as decomposition
+import numpy as np
 
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):
@@ -28,8 +29,9 @@ def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_dat
 
 
 def clean_prices_df(df):
-  """Cleans dataframe by filtering out rows with missing values and converting the date to datetime format."""
+  """Cleans dataframe by filtering out rows with missing values and converting price to float and date to datetime format."""
   df_clean = df.dropna()
+  df_clean.price = df_clean.price.astype(np.float64)
   df_clean.date_of_transfer = pd.to_datetime(df_clean.date_of_transfer)
   return df_clean
 

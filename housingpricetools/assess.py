@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import sklearn.decomposition as decomposition
 import numpy as np
 from scipy.spatial.distance import cdist
+from sklearn.preprocessing import MinMaxScaler
+
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):
     """
@@ -69,6 +71,14 @@ def get_closest_features(points_df, osm_df):
         if not right_points.empty:
             dists = distance_to_closest(new_df[['latitude', 'longitude']], right_points)
             new_df[col] = dists
-    return new_df
+    return new_df.drop(['latitude', 'longitude'], axis=1)
 
+
+def minmax_scale_columns(df):
+    """MinMax-scales all columns in df to the interval [0,1]. Returns the scaled df as well as the fitted scaler."""
+    transformer = MinMaxScaler()
+    transformer.fit(df)
+    scaled = transformer.transform(df)
+    scaled_df = pd.DataFrame(scaled, columns=df.columns)
+    return scaled_df, transformer
 

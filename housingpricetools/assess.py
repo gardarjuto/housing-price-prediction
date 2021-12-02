@@ -29,31 +29,22 @@ def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_dat
 
 
 def clean_prices_df(df):
-  """Cleans dataframe by filtering out rows with missing values and converting price to float and date to datetime format."""
-  df_clean = df.dropna()
-  df_clean.price = df_clean.price.astype(np.float64)
-  df_clean.date_of_transfer = pd.to_datetime(df_clean.date_of_transfer)
-  return df_clean
+    """Cleans dataframe by filtering out rows with missing values and converting price to float and date to datetime format."""
+    df_clean = df.dropna()
+    df_clean.price = df_clean.price.astype(np.float64)
+    df_clean.date_of_transfer = pd.to_datetime(df_clean.date_of_transfer)
+    return df_clean
 
 
 def one_hot_encode_cols(df):
-  """Returns a dataframe with all columns one-hot encoded."""
-  return pd.concat([pd.get_dummies(df[col], prefix=col, dummy_na=True) for col in df.columns], axis=1)
+    """Returns a dataframe with all columns one-hot encoded."""
+    return pd.concat([pd.get_dummies(df[col], prefix=col, dummy_na=True) for col in df.columns], axis=1)
 
 
-def data():
-    """Load the data from access and ensure missing values are correctly encoded as well as indices correct, column names informative, date and times correctly formatted. Return a structured data structure such as a data frame."""
-    df = access.data()
-    raise NotImplementedError
+def print_correlations(df):
+    """Calculates and prints the correlations between price and columns of type float"""
+    for col in df.select_dtypes(include='float').columns:
+        if col != 'price':
+            print(f"Correlation between pricea and {col}:", df['price'].corr(df[col]))
 
-def query(data):
-    """Request user input for some aspect of the data."""
-    raise NotImplementedError
 
-def view(data):
-    """Provide a view of the data that allows the user to verify some aspect of its quality."""
-    raise NotImplementedError
-
-def labelled(data):
-    """Provide a labelled set of data ready for supervised learning."""
-    raise NotImplementedError

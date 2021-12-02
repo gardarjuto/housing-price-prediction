@@ -53,21 +53,22 @@ def distance_to_closest(points1, points2):
     return cdist(points1, points2).min(axis=1)
 
 
-def add_closest_features(prices_df, osm_df):
+def get_closest_features(points_df, osm_df):
     """
-    Returns prices_df with added column for each feature in osm_df, representing the distance
-    from each point in prices_df to the closest non-na instance of the feature in osm_df.
+    Returns DataFrame with one column for each feature in osm_df (if not all nan), representing the distance
+    from each point in points_df to the closest non-na instance of the feature in osm_df.
     """
-    new_df = prices_df.copy()
+    new_df = points_df.copy()
     osm_cpy = osm_df.copy()
     osm_cpy['latitude'] = osm_cpy['geometry'].y
     osm_cpy['longitude'] = osm_cpy['geometry'].x
-    left_points = new_df[['latitude', 'longitude']]
     for col in osm_df.columns:
         if col == 'geometry':
             continue
         right_points = osm_cpy.dropna(subset=[col])[['latitude', 'longitude']]
         if not right_points.empty:
-            dists = distance_to_closest(left_points, right_points)
+            dists = distance_to_closest(new_df[['latitude', 'longitude']], right_points)
             new_df[col] = dists
     return new_df
+
+

@@ -45,6 +45,6 @@ def print_correlations(df):
     """Calculates and prints the correlations between price and columns of type float"""
     for col in df.select_dtypes(include='float').columns:
         if col != 'price':
-            print(f"Correlation between pricea and {col}:", df['price'].corr(df[col]))
+            print(f"Correlation between price and {col}:", df['price'].corr(df[col]))
 
 

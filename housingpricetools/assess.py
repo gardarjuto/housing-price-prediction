@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.decomposition as decomposition
 import numpy as np
-
+from scipy.spatial.distance import cdist
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):
     """
@@ -48,3 +48,26 @@ def print_correlations(df):
             print(f"Correlation between price and {col}:", df['price'].corr(df[col]))
 
 
+def distance_to_closest(points1, points2):
+    """Find the distance to the nearest point in points2 for each point in points1."""
+    return cdist(points1, points2).min(axis=1)
+
+
+def add_closest_features(prices_df, osm_df):
+    """
+    Returns prices_df with added column for each feature in osm_df, representing the distance
+    from each point in prices_df to the closest non-na instance of the feature in osm_df.
+    """
+    new_df = prices_df.copy()
+    osm_cpy = osm_df.copy()
+    osm_cpy['latitude'] = osm_cpy['geometry'].y
+    osm_cpy['longitude'] = osm_cpy['geometry'].x
+    left_points = new_df[['latitude', 'longitude']]
+    for col in osm_df.columns:
+        if col == 'geometry':
+            continue
+        right_points = osm_cpy.dropna(subset=[col])[['latitude', 'longitude']]
+        if not right_points.empty:
+            dists = distance_to_closest(left_points, right_points)
+            new_df[col] = dists
+    return new_df

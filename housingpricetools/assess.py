@@ -1,13 +1,14 @@
 from .config import *
 
-import pandas
+import pandas as pd
 import matplotlib.pyplot as plt
 import sklearn.decomposition as decomposition
 
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):
     """
-    Queries Price Paid database table for all datapoints within latitude and longitude range and the start and end date.
+    Queries database for all datapoints within latitude and longitude range and the start and end date.
+    Joins the period within the Price Paid table with the postcode table.
     Converts the rows into a pandas DataFrame and returns it. Irrelevant columns are excluded such as unique ids and object 
     names since they don't have predictive power.
     """

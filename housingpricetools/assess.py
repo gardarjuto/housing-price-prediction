@@ -27,12 +27,15 @@ def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_dat
 
 
 def clean_prices_df(df):
-  """
-  Cleans DataFrame by filtering out rows with missing values and converting the date to datetime format. 
-  """
-  df_clean = df.dropna(inplace=True)
+  """Cleans dataframe by filtering out rows with missing values and converting the date to datetime format."""
+  df_clean = df.dropna()
   df_clean.date_of_transfer = pd.to_datetime(df_clean.date_of_transfer)
-  return df
+  return df_clean
+
+
+def one_hot_encode_cols(df):
+  """Returns a dataframe with all columns one-hot encoded."""
+  return pd.concat([pd.get_dummies(df[col], prefix=col, dummy_na=True) for col in df.columns], axis=1)
 
 
 def data():

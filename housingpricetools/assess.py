@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import sklearn.decomposition as decomposition
 import numpy as np
 from scipy.spatial.distance import cdist
-from sklearn.preprocessing import Normalizer
+from sklearn.preprocessing import StandardScaler
 
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):
@@ -74,9 +74,12 @@ def get_closest_features(points_df, osm_df):
     return new_df.drop(['latitude', 'longitude'], axis=1)
 
 
-def normalise_columns(df):
-    """Normalises all columns in df. Returns the scaled df as well as the fitted scaler."""
-    transformer = Normalizer()
+def standardise_columns(df):
+    """
+    Standardises all columns in df, i.e. subtracts the mean and divides by the standard deviation. 
+    Returns the scaled df as well as the fitted scaler.
+    """
+    transformer = StandardScaler()
     transformer.fit(df)
     scaled = transformer.transform(df)
     scaled_df = pd.DataFrame(scaled, columns=df.columns)

@@ -82,3 +82,10 @@ def normalise_columns(df):
     scaled_df = pd.DataFrame(scaled, columns=df.columns)
     return scaled_df, transformer
 
+
+def pca_transform(df, n_components, svd_solver='full'):
+    pca = PCA(n_components=n_components, svd_solver=svd_solver)
+    pca.fit(df)
+    pc_data = pca.transform(df)
+    pc_df = pd.DataFrame(pc_data, columns=[f'PC{i+1}' for i in range(len(pc_data[0]))])
+    return pc_df

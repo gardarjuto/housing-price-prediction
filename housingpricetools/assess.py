@@ -6,6 +6,7 @@ import sklearn.decomposition as decomposition
 import numpy as np
 from scipy.spatial.distance import cdist
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 
 def query_prices_latlon_date(conn, min_lat, max_lat, min_lon, max_lon, start_date, end_date):

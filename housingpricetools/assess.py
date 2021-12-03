@@ -74,8 +74,8 @@ def get_closest_features(points_df, osm_df):
     return new_df.drop(['latitude', 'longitude'], axis=1)
 
 
-def minmax_scale_columns(df):
-    """MinMax-scales all columns in df to the interval [0,1]. Returns the scaled df as well as the fitted scaler."""
+def normalise_columns(df):
+    """Normalises all columns in df. Returns the scaled df as well as the fitted scaler."""
     transformer = MinMaxScaler()
     transformer.fit(df)
     scaled = transformer.transform(df)

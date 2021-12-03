@@ -8,7 +8,7 @@ import numpy as np
 
 
 
-def prepare_data(date, latitude, longitude, property_type, nodes, saler, pca):
+def prepare_data(date, latitude, longitude, property_type, nodes, scaler, pca):
     """Prepares input data for training by scaling it according to the training data"""
     date_rel = pd.DataFrame([[1.0 * (date - datetime(1995, 1, 1)).days]], columns=['date_of_transfer'])
     onehot_features_input = pd.DataFrame([[1.0]], columns=['property_type_' + property_type])
